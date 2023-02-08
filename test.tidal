@@ -1,0 +1,316 @@
+setcps (120/60/4)
+
+hush
+
+d1 $ silence
+d2 $ silence
+d3 $ silence
+d4 $ silence
+
+d1 $ s "808hc!7"
+  #amp 0.2
+
+d1 $ n "[[0 ~ 0] 2 [8 9]*2 2, 3(5,8)]"
+  |<| n "4 5"
+  # sound "cpu"
+  # vowel "a b c d"
+  # squiz "4 1 0 3"
+  # room 0.4
+
+d1 $ jux rev $ s "[east:6(1,7), east:1(3,7), east:3(2,7), east:5(8,14)]"
+  # amp 0.2
+
+d1 $ jux rev $ s "[east:6(1,4), east:1(3,4), east:3(2,4), east:5(5,8)]"
+  # amp 0.4
+
+-- 1 3 5 6 8 10 12
+--   2 2 1 2 2  1
+-- a b c f g
+--  6、1、2、b3、3、5
+
+scaleList
+
+let scale = getScale (scaleTable ++ [("blues", [0,3,5,6,7,10]),
+                                     ("bepop", [0,2,4,5,7,9,10,11])
+                                    ])
+
+
+d2 $ n (scale "major" $ "1 4 [3 3] 5 3 5 2") |+ "rand 3"
+  # s "supervibe"
+  # decay 1
+  # sus 0.7
+  # room 0.2
+  # delay 0.1
+  # speed (range 0.5 1.5 square)
+
+d1 $ sound "bd(5,8)" # speed (range 1 3 perlin)
+
+d3 $ jux rev $ n "<d'maj7'4 g'maj7'4 c'min7'4 a'min7'4 d'maj7'4 g'maj7'4 e'min7'4 a'maj7'4>!2"
+  # s "superpiano"
+  # room 0.3
+  # amp 0.1
+
+-- This all works for effects too:
+d1 $ n "0(5,8) [4 1]" # sound "drum"
+  # squiz "0 2 5"
+  |+ squiz "<0 2 3>"
+
+-- Or again, you can add the number patterns, rather than the control
+-- patterns. This is the same:
+d1 $ jux rev $ n "0(5,8) [4 1]" # sound "drum"
+  # squiz ("0 2 5" |+ "<0 2 3>")
+
+-- See which you prefer to do!
+
+-- 'saw' is a pattern that slowly moves from 0 to 1 over a cycle. Here
+-- I'm slowing it down so it lasts 4 cycles, slowing increasing the
+-- speed over that time:
+d1 $ n "[0 4 2] [4 1] 3 [2 0] 3 [3 1] 4 4" # sound "cpu"
+  # squiz 3
+  # speed "1 [2 3] 3"
+  |+ speed (slow 4 saw)
+
+d1 $ qtrigger 1 $ seqP [
+  (0, 12, sound "bd bd*2"),
+  (4, 12, sound "hh*2 [sn cp] cp future*4"),
+  (8, 12, sound (samples "arpy*8" (run 16)))
+]
+
+let pats = [("drums", s "drum cp*2"),
+            ("melody", s "arpy:2 arpy:3 arpy:5"),
+            ("craziness", s "cp:4*8" # speed ( sine + 0.5))
+           ]
+    fx = [("higher", (# speed 2))]
+in
+d1 $ ur 8 "[drums, melody] [drums,craziness,melody] melody:higher" pats fx
+
+let pats =
+      [
+        ("a", stack [n "c4 c5 g4 f4 f5 g4 e5 g4" # s "superpiano" # gain "0.7",
+                     n "[c3,g4,c4]" # s "superpiano"# gain "0.7"
+                    ]
+        ),
+        ("b", stack [n "d4 c5 g4 f4 f5 g4 e5 g4" # s "superpiano" # gain "0.7",
+                     n "[d3,a4,d4]" # s "superpiano"# gain "0.7"
+                    ]
+        ),
+        ("c", stack [n "f4 c5 g4 f4 f5 g4 e5 g4" # s "superpiano" # gain "0.7",
+                     n "[f4,c5,f4]" # s "superpiano"# gain "0.7"
+                    ]
+        )
+      ]
+    fx = [("reverb", (# (room 0.8 # sz 0.99 # orbit 1))),
+          ("faster", fast 2)
+         ]
+in
+d1 $ ur 12 "a b:reverb c:faster" pats fx
+
+let pats =
+      [
+        ("a", stack [n "c4 c5 g4 f4 f5 g4 e5 g4" # s "superpiano" # gain "0.7",
+                     n "[c3,g4,c4]" # s "superpiano"# gain "0.7"
+                    ]
+        ),
+        ("b", stack [n "d4 c5 g4 f4 f5 g4 e5 g4" # s "superpiano" # gain "0.7",
+                     n "[d3,a4,d4]" # s "superpiano"# gain "0.7"
+                    ]
+        ),
+        ("c", stack [n "f4 c5 g4 f4 f5 g4 e5 g4" # s "superpiano" # gain "0.7",
+                     n "[f4,c5,f4]" # s "superpiano"# gain "0.7"
+                    ]
+        )
+      ]
+in
+d1 $ ur 12 "a b c" pats []
+
+d1 $ loopAt 4 $ sound "breaks125"
+
+d1 $ splice 8 "[<0*8 0*2> 3*4 2 4] [4 .. 7]" $ sound "breaks165"
+
+d1 $ slow 4 $ striate 3 $ sound "numbers:0 numbers:1 numbers:2 numbers:3"
+
+d1 $ loopAt 8 $ chop 32 $ sound "bev"
+
+d1 $ chop "<16 128 32>" $ sound "arpy ~ feel*2 newnotes"
+
+d1 $ chop 16 $ sound "arpy ~ feel*2 newnotes"
+
+d1 $ n (arp "<up down diverge>" "<a'm9'8 e'7sus4'8>") # sound "superpiano"
+
+d1 $ n (arpg "'major7 [0,4,7,11]") # sound "superpiano"
+
+d1 $ n (toScale [0,2,3,5,7,8,10] "0 1 2 3 4 5 6 7") # sound "superpiano"
+
+d1 $ n (scale "techno" "0 1 2 3 4 5 6 7") # sound "superpiano"
+
+let scale = getScale (scaleTable ++ [("techno", [0,2,3,5,7,8,10]),
+                                     ("broken", [0,1,4,7,8,10])
+                                    ])
+
+d1 $ chop "32" $ chunk 4 (fast 2 . (|- n 12)) $ off 0.25 (|+ 7) $ struct (iter 4 "t(5,8)")
+  $ n (scale "neapolitanMajor" "0 .. 7") # sound "superpiano"
+
+d1 $ struct (iter 4 "t(5,8)")
+  $ n (scale "neapolitanMajor" "0 .. 7") # sound "superpiano"
+
+d1 $ stut 4 0.5 0.1 $ sound "bd sn"
+
+d1 $ stack [ ghost $ sound "~ sn", sound "bd*2 [~ bd]" ]
+
+d1 $ swingBy (1/3) 4 $ sound "hh*8"
+
+d1 $ compress (1/4, 3/4) $ s "[bd sn]!"
+
+d1 $ every 2 (hurry 2) $ sound "bd sn:2 ~ cp"
+
+d1 $ sound (fast 2 "bd sn kurt")
+   # fast 3 (vowel "a e o")
+
+d1 $ every 3 (fast 2) $ n "0 1 [~ 2] 3" # sound "arpy"
+
+d1 $ every 3 rev $ n "0 1 [~ 2] 3" # sound "arpy"
+
+d1 $ spread fast[2,3] $ sound "ho ho:2 ho:3 hc"
+
+d1 $ fast 2 $ sound "ho ho:2 ho:3 hc"
+
+d1 $ sound "ho ho:2 ho:3 hc"
+
+d1 $ slow 16 $ sound $ step' ["feel:0", "sn:1", "bd:0"]
+(take 512 $ lindenmayer 5 "0:1~~~,1:0~~~2~~~~~0~~~2~,2:2~1~,~:~~1~"
+"0")
+
+d1 $ s (step "sn" "x x 12 ")
+
+d1 $ sound $ scramble 3 "bd sn hh"
+
+d1 $ sound $ shuffle 3 "bd sn hh"
+
+d1 $ bite 4 "2 [0 3] 1*4 1" $ n "0 .. 7" # sound "arpy"
+
+d1 $ bite 4 "0 1 2 3" $ n "0 .. 7" # sound "arpy"
+
+d1 $ chunk 4 (hurry 2) $ sound "bd sn:2 [~ bd] sn:2"
+
+d1 $ chunk 4 (# speed 2) $ sound "bd hh sn cp"
+
+d1 $ trunc "<0.75 0.25 1>" $ sound "bd sn:2 [mt rs] hc"
+
+d1 $ trunc 0.75 $ sound "bd sn*2 cp hh*4 arpy bd*2 cp bd*2"
+
+d1 $ stripe 3 $ sound "bd sd ~ [mt ht]"
+
+d2 $ sound "cp"
+
+d1 $ slow 2 $ degrade $ sound "[[[feel:5*8,feel*3] feel:3*8], feel*4]"
+   # accelerate "-6"
+   # speed "2"
+
+quantise 5 [0, 1.3 ,2.6,3.2,4.7,5]
+
+d1 $ s "superchip*8" # n (quantise 1 $ range (-10) (10) $ slow 8 $ cosine)
+                     # release (quantise 5 $ slow 8 $ sine + 0.1)
+
+d1 $ jux (iter 4) $ sound "arpy arpy:2*2"
+  |+ speed (slow 4 $ range 1 1.5 sine)
+
+d1 $ iter 4 $ sound "bd hh sn cp"
+
+d1 $ s (steps [("cp","x  x x  x x  x"),("bd", "xxxx")])
+
+d1 $ layer [id, rev, fast 2] $ sound "arpy [~ arpy:4]"
+
+d1 $ superimpose (fast 2) $ sound "bd sn [cp ht] hh"
+
+d1 $ stack [
+  sound "bd bd*2",
+  sound "hh*2 [sn cp] cp future*4",
+  sound "arpy" +| n "0 .. 15"
+]
+
+d1 $ sound (overlay "bd sn:2" "cp*3")
+
+d1 $ n (run 8) # sound "amencutup"
+
+d1 $ n (scan 8) # sound "amencutup"
+
+d1 $ n (flatpat $ listToPat [[0,4,7],[(-12),(-8),(-5)]]) # s "superpiano" # sustain 2
+
+d1 $ brak $ sound "[feel feel:3, hc:3 hc:2 hc:4 ho:1]"
+
+d1 $ append (sound "bd*2 sn") (sound "arpy jvbass*2")
+
+d1 $ cat [sound "bd*2 sn", sound "arpy jvbass*2"]
+
+d1 $ cat [sound "bd*2 sn", sound "arpy jvbass*2", sound "drum*2"]
+
+d1 $ cat [sound "bd*2 sn", sound "jvbass*3", sound "drum*2", sound "ht mt"]
+
+-- 1 2 3 4 5 6 7
+-- c d e f g a b
+
+d2 $ note "a3 c4 g4 _ [g4 f4] [g4 a4] e4 _"
+   # sound "<supersaw>"
+   # pitch1 0.4
+   # attack 0.35
+   # accelerate 0.2
+   # decay 0.2
+
+d1 $ n (slow 2 $ fmap (*7) $ run 8)
+  # s "supergong"
+  # decay "[1 0.6]/4"
+  # voice "[0.5 0]/8"
+
+
+
+d1 $ s "{bd hh 808:4}%8"
+
+d2 $ s "{bd cp 808:5}%4" # speed 2
+
+d1 $ s "[bd(5,8), cp(4,8), hh(7,8), bass:1(7,16)]"
+
+d1 $ s "[bd(5,8), cp(1,8)?, hh(7,8), bass:1(8,16)]"
+
+d1
+  $ superimpose ((# speed "2*12") . (# squiz (slow 2 $ range 1 16 $ sine)) . (striate
+  "[4|2|3]") . (ply "[[1 1 2 4]|[1 1 2 2]]") . (# room "0 0.5") . (# sz "0.2 0.4"))
+  $ fast 2
+  $ s "bd hh bd hh" # amp 0.4
+
+
+-- with the dot operator
+d1
+  $ every 2 (# speed 2) . fast 2
+  $ s "bd hh bd hh"
+
+-- without the dot operator
+d1
+  $ every 2 (# speed 2)
+  $ fast 2
+  $ s "bd hh bd hh"
+
+
+d1 $ n (slow 2 $ fmap (*7) $ run 8)
+  # s "supersquare"
+  # decay "[1.2 0.2]"
+  # accelerate "[1 0]"
+  # voice "[1 0]/8"
+  # lfo "[0.2 0]"
+
+d2 $ s "[bd:3 sd:3, hh:3(3, 8)]"
+
+let b = "[<<c'7*4 f'7*4 g'7*4> <c'7*4 f'7*4 f'7*4> c'7*4 c'7*4>]"
+
+d3 $ n b
+  # sound "supermandolin"
+
+d2 $ s "[~ hh]*2"
+
+once $ s "trump"
+
+d1 $ s "[bd*3, hh*4, [~ cp]*2, bass*4]"
+
+p "scroll" $ s "arpy:1 arpy:2 arpy:3 arpy:4 arpy:5"
+
+-- all right, that's better
+p "scroll" $  s "[bd*4, [arpy:1,arpy:2,arpy:3,arpy:4,arpy:5](5,8)]"

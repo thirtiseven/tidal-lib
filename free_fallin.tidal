@@ -1,0 +1,35 @@
+setcps (84/60/4)
+
+hush
+
+d1
+  $ s "[[hh ~]*8, east:5 ~ east:1 east:5 ~ ~ east:1 ~]"
+  # amp 0.7
+  # fshift 2
+
+d2
+  $ n "[f'maj _ _ f'sus4 _ _ _ _ f'sus4 f'maj _ c'sus4 _ _ _ _]/2"
+  # s "supersquare"
+  # attack 0.05
+  # decay 0.05
+  # sustain 0.1
+  # release 0.8
+  # amp 0.1
+  # phasr 1
+  # djf 0.7
+
+d3
+  $ n "[f2 _ _ as2 _ _ _ _ as2 f2 _ c3 _ _ _ _]/2"
+  # s "supersaw"
+  # attack 0.4
+  # decay 0.2
+  # sustain 0.3
+  # release 0.9
+  # amp 0.8
+
+d4
+  $ n "[f'maj _ _ f'sus4 _ _ _ _ f'sus4 f'maj _ c'sus4 _ _ _ _]/2"
+  # s "superpiano"
+  # detune 0.1
+  # velocity 0.3
+  # amp 1.2

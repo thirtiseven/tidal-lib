@@ -1,0 +1,34 @@
+setcps (86/60/4)
+
+hush
+
+d1 $ sometimes (# crush 4)
+$ degradeBy 0.3
+$ arp "updown thumbup updown"
+  $ n "<c'dom7 f'dom7 c'dom7!2 f'dom7!2 c'dom7!2 g'dom7 f'dom7 c'dom7 g'dom7>"
+  + "t"
+  # s "superpiano"
+  # room 0.3
+  # amp 0.3
+
+d2 $ degradeBy 0.6 $ n (scale "bebop" $ "1 2 2 3 4 5 3 2 5"
+        |+ "<0 5 0!2 5!2 0!2 7 5 0 7>")
+  # sound "superpiano"
+
+d3 $ n "[6(1,4), 3(3,8), 1(2,4)]"
+  # s "east"
+
+d4 $ n "<c3 f3 c3 c3 f3 f3 c3 c3 g3 f3 c3 g3>" +| "t [t t]"
+  # s "supersaw"
+  # att 0.1
+  # sus 0.9
+  # room 1.1
+  # decay 0.05
+  # release 0.05
+  # voice 0.2
+  # amp "1 [0.8 0.8 0.8]"
+
+let scale = getScale (scaleTable ++ [("techno", [0,2,3,5,7,8,10]),
+                                     ("broken", [0,1,4,7,8,10]),
+                                     ("bebop", [0,2,4,5,7,9,10,11])
+                                    ])

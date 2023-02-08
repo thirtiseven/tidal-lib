@@ -1,0 +1,148 @@
+-- Good samples
+-- Good samples
+-- Good samples
+
+-- Drums
+d1 $ s "808" <| n (run 6) -- 6 misc 808 sound
+d1 $ s "cc" <| n (run 6) -- some loud reverby cymbals
+d1 $ fast 2 $ s "clubkick" <| n (run 5) -- five similar very aggressive kicks
+d1 $ s "drumtraks" <| n (run 13) -- loudish kit
+d1 $ slow 2 $ s "east" <| n (run 9) -- 9 'world' drum sounds, ok
+d1 $ s "feel" <| n (run 7) -- quite nice bank of 7 drum sounds
+d1 $ slow 2 $ s "future" <| n (run 17) -- synthetic hits, mostly kicks
+d1 $ s "hardcore" <| n (run 12) -- 12 synth drum hits
+d1 $ s "house" <| n (run 8) -- quite a nice kit, one pitched sound at 5 ~ Ebm
+
+-- Bass
+d1 $ slow 2 $ s "bass" <| n (run 4) -- four short bass sounds, nasty abrupt release
+d1 $ slow 4 $ s "bassdm" <| n (run 24) -- 24 rather similar acoustic-ish kicks
+d1 $ slow 4 $ s "jvbass" <| n (run 13) -- selection synth notes, black notes starting Gb
+
+-- Melody
+d1 $ slow 2 $ s "arpy" <| up "c'maj(3,8) f'maj(3,8) ef'maj(3,8,1) bf4'maj(3,8)"
+d1 $ slow 8 $ s "moog" <| n (run 7) -- long low synth notes, various pitches
+
+-- Effects
+d1 $ s "bleep" <| n (run 13) -- rtd2 ish, loud!
+d1 $ slow 4 $ s "em2" <| n (run 6) -- six longer sounds, kalimba, flute, loon?
+d1 $ slow 2 $ s "gab" <| n (run 10) -- bitcrushed hits
+d1 $ slow 4 $ s "gtr" <| n (run 3) -- three long C notes elect guitar
+d1 $ s "hmm" -- female voice saying 'hmm'
+d1 $ s "sf" <| n (run 18) -- kind of interesting collection of short hits, one C note at 0
+d1 $ slow 4 $ s "trump" <| n (run 11) -- trumpet falls one phrase, thin eq
+
+-- Sonud effects
+-- Sonud effects
+-- Sonud effects
+
+d1 $ sound "numbers:1 numbers:2 numbers:3 numbers:4" # speed "1 1.5 2 0.5"
+
+d1 $ sound "bd*32" # speed (range 0.5 2.5 (sine * (slow 2 saw)))
+
+d1 $ sound "numbers:1 numbers:2 numbers:3 numbers:4" # pan "0 0.5 1"
+
+d1 $ sound "bd sd [~ bd] [cp bd*2]"
+   # squiz "5"
+
+d1 $ n "0 1 0 [2 4] 2 ~ 1*2 3" # s "cpu" # vowel "a o e"
+
+d2 $ jux rev $ sound "sax(3,8)" # legato 1 # n 3
+  # note "<[9 7] 5 [9 12]>" # djf 0.7 # sz 0.4 # room 0.4
+
+d1 $ sound "kick clap? kick snare"
+  # delay 0.3 # delaytime (1/3) # delayfb 0.8 # speed 1.5
+
+-- Functions
+-- Functions
+-- Functions
+
+-- drops events at random:
+d1 $ degrade $ sound "bd*8"
+
+d1 $ degradeBy 0.6 $ sound "bd*8"
+
+d1 $ sometimes (hurry 2) $ n "0 ~ 3 1 5 2 ~ 5" # sound "cpu"
+
+d1 $ sometimes (# crush 4) $ n "0 ~ 3 1 5 2 ~ 5" # sound "cpu"
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4" # s "superpiano"
+
+d1 $ arp "updown thumbup" $ n "<c'maj'4 e'min7'4>" # s "superpiano"
+
+d1 $ off 0.25 (# crush 4) $ n "c e" # sound "supermandolin"
+
+d1 $ every 3 (rev . chop 8 . fast 2) $
+  sound "bd [~ sd] bd sd" # squiz 2
+
+-- Grammar
+-- Grammar
+-- Grammar
+
+d1 $ n "0 2 4 6 0 2 6 8" # sound "cpu"
+
+d1 $ sound (cat ["kick snare:4 [~ kick] snare:5", "kick snare:4 . hc(5,8)"])
+
+d1 $ cat [fast "1 2 3 4" $ sound "lt mt ht ~",
+         sound "clap:4(3,8)" # speed 2,
+         sound "[kick:5(5,8), snare:3(7,16,3)]"
+        ]
+
+d1 $ sound (randcat ["kick snare:4 [~ kick] snare:5", "kick snare:4 . hc(5,8)"])
+
+d1 $ n (scale "ritusen" $ "0 [7 2] 3 2" |+ (irand 3))
+  # sound "superpiano"
+
+d1 $ stack [(fast "1 2 3 4" $ sound "lt mt ht ~"),
+            (sound "clap:4(3,8)" # speed 2),
+            sound "[kick:5(5,8), snare:3(7,16,3)]"
+           ]
+
+drawLine $ 0.25 <~ "a b c d"
+
+drawLine $ 0.25 ~> "a b c d"
+
+d1 $ struct "t(3,8)" $ sound "snare:4"
+
+d1 $ n (fit 1 [9,10,11,12,13,14] "0 1 2 ~") # s "alphabet"
+
+d1 $ note (fit 2 [0,2,7,5,12] "0 ~ 1 [2 3]") # sound "supermandolin"
+  # legato 2 # gain 1.3
+
+-- Synthesizer
+
+
+
+
+-- Cheatsheet
+-- Cheatsheet
+-- Cheatsheet
+
+minPent majPent ritusen egyptian kumai hirajoshi iwato chinese indian pelog
+prometheus scriabin gong shang jiao zhi yu whole augmented augmented2 hexMajor7
+hexDorian hexPhrygian hexSus hexMajor6 hexAeolian major ionian dorian phrygian
+lydian mixolydian aeolian minor locrian harmonicMinor harmonicMajor melodicMinor
+melodicMinorDesc melodicMajor bartok hindu todi purvi marva bhairav ahirbhairav
+superLocrian romanianMinor hungarianMinor neapolitanMinor enigmatic spanish
+leadingWhole lydianMinor neapolitanMajor locrianMajor diminished diminished2
+chromatic
+
+let scale = getScale (scaleTable ++ [("techno", [0,2,3,5,7,8,10]),
+                                     ("broken", [0,1,4,7,8,10])
+                                    ])
+
+d1 $ n (toScale [0,2,3,5,7,8,10] "0 1 2 3 4 5 6 7") # sound "superpiano"
+
+major maj aug plus sharp5 six 6 sixNine six9 sixby9 6by9 major7 maj7 major9 maj9 add9 major11 maj11 add11 major13 maj13
+ add13 dom7 dom9 dom11 dom13 sevenFlat5 7f5 sevenSharp5 7s5 sevenFlat9 7f9 nine eleven 11 thirteen 13 minor min diminish
+ed dim minorSharp5 msharp5 mS5 minor6 min6 m6 minorSixNine minor69 min69 minSixNine m69 mSixNine m6by9 minor7flat5 min7f
+lat5 m7flat5 m7f5 minor7 min7 m7 minor7sharp5 min7sharp5 m7sharp5 m7s5 minor7flat9 min7flat9 m7flat9 m7f9 minor7sharp9 m
+in7sharp9 m7sharp9 m7s9 diminished7 dim7 minor9 min9 m9 minor11 min11 m11 minor13 min13 m13 one 1 five 5 sus2 sus4 seven
+Sus2 7sus2 sevenSus4 7sus4 nineSus4 ninesus4 9sus4 sevenFlat10 7f10 nineSharp5 9s5 m9sharp5 m9s5 sevenSharp5flat9 7s5f9
+m7sharp5flat9 elevenSharp 11s m11sharp m11s
+
+
+up down updown downup up&down down&up converge
+diverge disconverge pinkyup pinkyupdown
+thumbup thumbupdown
+
+d1 $ n (arp "<up down diverge>" "<a'm9'8 e'7sus4'8>") # sound "superpiano"

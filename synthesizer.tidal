@@ -1,0 +1,159 @@
+setcps (100/60/4)
+
+hush
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "supergong"
+  # decay 1       -- adjusts how the harmonics decay
+  # voice 0       -- provides something like a tone knob
+  # accelerate 0  -- for pitch glide
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "supersaw"
+  # voice 0.5     -- controls the pulse width (exactly zero or one will make no sound)
+  # decay 0       -- the decay
+  # accelerate 0  -- pitch glide
+  # semitone 12   -- how far off in pitch the secondary oscillator is (need not be integer)
+  # resonance 0.2 -- filter resonance
+  # lfo 1         -- how much the LFO affects the filter frequency
+  # rate 1        -- LFO rate
+  # pitch1 1      -- filter frequency scaling multiplier, the frequency itself follows the pitch set by “n”
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "superpwm"
+  # voice 0.5     -- controls the pulse width (exactly zero or one will make no sound)
+  # decay 0       -- the decay
+  # accelerate 0  -- pitch glide
+  # semitone 12   -- how far off in pitch the secondary oscillator is (need not be integer)
+  # resonance 0.2 -- filter resonance
+  # lfo 1         -- how much the LFO affects the filter frequency
+  # rate 1        -- LFO rate
+  # pitch1 1      -- filter frequency scaling multiplier, the frequency itself follows the pitch set by “n”
+
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "superchip"
+  # slide 0       -- for a linear frequency glide
+  # rate 1        -- repeats the above glide “n” times (can be fractional or negative)
+  # accelerate 0  -- pitch glide
+  # pitch2 2      -- control the ratio of harmonics
+  # pitch3 3      -- control the ratio of harmonics
+  # voice 0
+
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "superhoover"
+  # decay 0       -- the decay
+  # accelerate 0  -- pitch glide
+  # slide 1       -- how fast it moves through the phase
+  # detune 1
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "supertron"
+  # accelerate 0
+  # detune 1
+  # voice 0
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "superreese"
+  # accelerate 0
+  # detune 1
+  # voice 0
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "supernoise"
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "superstatic"
+  # voice 1 -- at 0 is a digital noise for which “n” controls rate, at 1 is Brown+White noise for which “n” controls knee frequency
+  # accelerate 0  -- causes glide in n, “rate” will cause it to repeat
+  # pitch1 1 -- scales the bandpass frequency (which tracks “n”)
+  # slide 0 -- works like accelerate on the bandpass
+  # resonance 0.5 -- is the filter resonance
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "supercomparator"
+  # voice 0.5     -- controls the pulse width (exactly zero or one will make no sound)
+  # decay 0       -- the decay
+  # accelerate 0  -- pitch glide
+  # resonance 0.5 -- filter resonance
+  # lfo 1         -- how much the LFO affects the filter frequency
+  # rate 1        -- LFO rate
+  # pitch1 1      -- filter frequency scaling multiplier, the frequency itself follows the pitch set by “n”
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "supermandolin"
+  # sustain 1
+  # accelerate 0
+  # detune 0.2
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "superpiano"
+  # velocity 1
+  # sustain 1
+  # detune 0.1
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "superfork"
+  # accelerate 0
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "superhammond"
+  # voice "<0 1 2 3 4 5 6 7 8 9>"
+
+-- 0. bass violin 16’
+-- 1. tibia 8’
+-- 2. bassoon 8’
+-- 3. french trumpet 8’
+-- 4. string ensemble
+-- 5. Blues
+-- 6. Jazz 1
+-- 7. Full Shout
+-- 8. Bro’ Jack
+-- 9. Jazz 2
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "supervibe"
+  # decay 0
+  # velocity 1
+  # accelerate 0
+  # detune 0
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "superfm"
+  # voice "<0 1 2 3 4 5>"
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "superhex"
+  # rate 1
+  # accelerate 0
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "superkick"
+  # n 1
+  # accelerate 0
+  # pitch1 1
+  # decay 1
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "super808"
+  # n 1
+  # rate 1
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "superhat"
+  # n 1
+  # accelerate 0
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "supersnare"
+  # n 1
+  # decay 1
+  # accelerate 0
+
+d1 $ arpeggiate $ n "c'maj'4 e'min7'4"
+  # s "superclap"
+  # n 1
+  # decay 1
+  # rate 1
+  # pitch1 1
