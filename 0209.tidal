@@ -1,0 +1,14 @@
+
+d1 $ s "[east:6(2,7), east:8(4,7,1), east:0(7,7)]"
+
+d2 $ n "<c'maj7(3,7) g'maj13(4,7) d'minor7(3,7) g'maj11(4,7)>"
+    # s "arpy"
+
+d3 $ n (scale "mixolydian" $ "0 [5 2] 3 ~ 2 2 ~" |+ (irand 3))
+    # s "superpiano"
+
+d4 $ jux rev $ off 0.25 (|+ n 12) $ n "c a f e"
+    # s "supersaw"
+    # attack 0.24
+    # lfo "sine" 0.5
+    # squiz "5"
