@@ -1,0 +1,56 @@
+Hush: crtl + option + h
+
+setcps (100/60/4)
+
+d1 $ s "[east:6(2,4), east:8(1,4), east:0(4, 4)]"
+
+d2 $ n "<c'maj [f'maj c'maj] [g'maj7 c'maj] [g'maj7 c'maj]>"
+    # s "superpiano"
+
+d3 $ n "<[[g g] c c c] [c f a a] [g [b b] f g] [g c c ~]>"
+    # s "superpiano"
+
+d2 $ n "<c'maj f'maj g'dom7 c'maj>"
+    # s "superpiano"
+
+ChatGPT 给出的一个随机和声进行： | Cmaj7 | Am7 | Dm7 | G7 |
+
+d2 $ n "<c'maj7 a'minor7 g'minor7 c'dom7>"
+    # s "superpiano"
+
+d3 $ n "<[c e g b] [a c e g] [d f a c] [g b d f]>"
+    # s "superpiano"
+
+d3 $ n "<[e e e [g|b|c]] [c c c e] [f [d|a|c] [d|a|c] [d|a|c]] [[d f] <b g>]>"
+    # s "supersaw"
+
+d3 $ degradeBy 0.3 $ n "<[c|e|g|b](8,14) [a|c|e|g](6,14) [d|f|a|c](9,14) [[g|b|d|f|~](4,14)]>"
+    # s "supersaw"
+
+C Ionian 调式的和声进行: C | Am | F | G
+
+d2 $ n "<c'major a'minor f'minor g'major>"
+    # s "superpiano"
+
+d3 $ n "<[c e g b] [a c e g] [f a c e] [g b d f]>"
+    # s "superpiano"
+
+d3 $ degradeBy 0.5 $ n "<[c|e|g|b]*14 [a|c|e|g]*14 [f|a|c|e]*14 [[g|b|d|f|~]*14]>"
+    # s "supersaw"
+
+
+d1 $ s "[east:1(9,14,1), east:4(3,7)]"
+
+walking bass
+
+d2 $ n "<c'major f'major g'major c'major>"
+    # s "superpiano"
+
+d3 $ shuffle 4 $ n "<[c2 e2 g2 b3] [f2 a3 c3 e3] [g2 b3 d3 f3] [c2 e2 g2 b3]>"
+    # s "superpiano"
+
+d1 $ scramble 4 $ n "0 1 2 3 4 5 6 7" # sound "arpy"
+   # room 0.3 # sz 0.8
+
+d1 $ sound (struct "t t ~ t" $ choose ["bd", "arpy", "kick"])
+
