@@ -39,7 +39,7 @@ d3 $ degradeBy 0.5 $ n "<[c|e|g|b]*14 [a|c|e|g]*14 [f|a|c|e]*14 [[g|b|d|f|~]*14]
     # s "supersaw"
 
 
-d1 $ s "[east:1(9,14,1), east:4(3,7)]"
+d1 $ s "[east:1(8,14,1), east:4(3,7), east:0(4,7)]"
 
 walking bass
 
@@ -54,3 +54,28 @@ d1 $ scramble 4 $ n "0 1 2 3 4 5 6 7" # sound "arpy"
 
 d1 $ sound (struct "t t ~ t" $ choose ["bd", "arpy", "kick"])
 
+pentatonic scale
+
+d2 $ n (scale "majPent" $ "[0|[0 0]] 0 0? [0|[0 0]] 0? 0? 0" |+ (irand 5))
+  # sound "superpiano"
+
+12 bar blues:
+
+d2 $ n "<c'dom9 c'dom9 c'dom9 c'dom9 f'dom7 f'dom7 c'dom7 c'dom7 g'dom13 f'dom9 c'dom7 c'dom7>"
+    # s "superpiano"
+
+let scale = getScale (scaleTable ++ [("blues", [0,3,5,6,7,10])
+                                    ])
+
+d3 $ n (scale "blues" $ "[0|[0 1 2]] [3|[3 3]] 4? [2|[3 2 1]] 4? 2? 0" |+ (irand 3))
+  # sound "superpiano"
+
+d4 $ n (scale "minPent" $ "0 0 0 0 0 0 0" |+ (irand 3))
+  # sound "superpiano"
+  # amp 0
+
+d1 $ sound "bd*2 sn:2 cp*3" # n (run 8) # speed "1 1.5 0.75 1.25" # gain 0.8
+
+d2 $ sound "arpy*4 [~ arpy]" # n (slow 2 $ scale "c4 major" (run 8)) # gain 0.6
+
+d3 $ sound "gabba*8 [~ gabba:1]" # n (slow 4 $ scale "c5 minor" (run 16)) # gain 0.4
