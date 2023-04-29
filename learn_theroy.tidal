@@ -1,6 +1,6 @@
 Hush: crtl + option + h
 
-setcps (100/60/4)
+setcps (80/60/4)
 
 d1 $ s "[east:6(2,4), east:8(1,4), east:0(4, 4)]"
 
@@ -74,8 +74,10 @@ d4 $ n (scale "minPent" $ "0 0 0 0 0 0 0" |+ (irand 3))
   # sound "superpiano"
   # amp 0
 
+new bing:
+
 d1 $ sound "bd*2 sn:2 cp*3" # n (run 8) # speed "1 1.5 0.75 1.25" # gain 0.8
 
-d2 $ sound "arpy*4 [~ arpy]" # n (slow 2 $ scale "c4 major" (run 8)) # gain 0.6
+d2 $ sound "[arpy arpy:2 arpy:3 arpy:4]*2 [~ arpy]" # n (slow 2 $ chord "c4'maj7") # gain 0.6
 
 d3 $ sound "gabba*8 [~ gabba:1]" # n (slow 4 $ scale "c5 minor" (run 16)) # gain 0.4

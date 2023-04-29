@@ -1,0 +1,10 @@
+
+
+d1 $ n "<c'major7 f'major7 g'major a'minor>"
+    # s "superpiano"
+
+d2 $ n "[0 2|[2 4] 4 7|[7 7] [4|2|4 2]]"
+    # s "superpiano"
+    # amp 0.5
+
+d3 $ s "[east:6(2,5), east:8(6,10), east:0(4, 5)]"
