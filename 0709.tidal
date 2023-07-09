@@ -1,0 +1,32 @@
+-- Set cps to be a fast house beat
+setcps (120/60/4)
+
+hush
+
+-- guitar to number of notes
+
+d1 $ n "e2 -32 a2 -27 d3 -22 g3 -17 b3 -13 e4 -8"
+  # sound "superpiano"
+
+-- shuffle rhythm
+
+d1 $ n "[e2 _ -32] [a2 _ -27] [d3 _ -22] [g3 _ -17] [b3 _ -13] [e4 _ -8]"
+    # sound "supersaw"
+    # attack 0.2
+    # release 0.2
+    # sustain 0.2
+    # room 0.2
+
+-- gtp to tidal
+
+-- 3 6 3 4 5 3 5 3 5 6 3 6 3
+
+d1 $ n "[-29 -26 -24 -23] [-22 -19 -17 -14] [-12 -11 -10 -7] -5"
+    # sound "supersaw"
+    # attack 0.2
+    # release 0.2
+    # sustain 0.2
+    # room 0.2
+
+d1 $ n "<[[[0, -5] -3 -5] [[-5, -10] -8 -10] [-12 -15] [-17 -20]] [-24 ~]>"
+    # sound "superpiano"

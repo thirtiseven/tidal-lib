@@ -1,6 +1,5 @@
 d1 $ n "<c'major7 f'major7 g'major a'minor>"
     # s "superpiano"
-    # delay wet
     # phaserrate 0.5
     # phaserdepth 0.2
     # dry 0.4
