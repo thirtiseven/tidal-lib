@@ -1,0 +1,24 @@
+d1 $ n "<[[[0, -5] -3 -5] [[-5, -10] -8 -10] [-12 -15] [-17 -20]] [-24 ~]>"
+    # sound "superpiano"
+
+d3 $ s "[east:6(2,12), east:3(3,8,1), east:4(1,4), east:5(9,16)]"
+    # amp 1
+
+hush
+
+in superCollider:
+
+MIDIClient.init;
+
+~midiOut = MIDIOut.newByName("IAC Driver", "Bus 1")
+
+~dirt.soundLibrary.addMIDI(\logic, ~midiOut);
+
+MIDIIn.connectAll;
+
+m = MIDIOut.new(0);
+MIDIClient.destinations;
+
+d1 $ n "0 2 4 7" # s "logic"
+
+d1 $ midinote "48 50 64 42" # s "logic" # midichan 1
