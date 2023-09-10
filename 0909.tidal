@@ -4,6 +4,7 @@ d1 $ n "<[[[0, -5] -3 -5] [[-5, -10] -8 -10] [-12 -15] [-17 -20]] [-24 ~]>"
 d3 $ s "[east:6(2,12), east:3(3,8,1), east:4(1,4), east:5(9,16)]"
     # amp 1
 
+
 hush
 
 in superCollider:
@@ -19,6 +20,17 @@ MIDIIn.connectAll;
 m = MIDIOut.new(0);
 MIDIClient.destinations;
 
-d1 $ n "0 2 4 7" # s "logic"
+d1 $ n "0 2 [4 4] 7" # s "logic" # midichan 0
 
-d1 $ midinote "48 50 64 42" # s "logic" # midichan 1
+d2 $ midinote "48 50 64 42" # s "logic" # midichan 1
+
+d3 $ n "<[[[0, -5] -3 -5] [[-5, -10] -8 -10] [-12 -15] [-17 -20]] [-24 ~]>"
+    # sound "logic"
+    # midichan 2
+
+ref: https://www.youtube.com/watch?v=94i_dxrPELA
+
+window -> midi environment
+
+new -> channel spliter -> connect to each channel
+new -> physical input -> connect to channel splitter
